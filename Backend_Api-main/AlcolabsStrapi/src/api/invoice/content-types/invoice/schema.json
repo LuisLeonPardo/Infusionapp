@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invoices",
+  "info": {
+    "singularName": "invoice",
+    "pluralName": "invoices",
+    "displayName": "Invoice"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "invoiceNumber": {
+      "type": "string"
+    },
+    "totalAmount": {
+      "type": "decimal"
+    },
+    "customeFeatures": {
+      "type": "json"
+    }
+  }
+}
