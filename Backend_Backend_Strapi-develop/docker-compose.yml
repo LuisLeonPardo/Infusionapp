@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: strapi_user
+      POSTGRES_PASSWORD: strapi_password
+      POSTGRES_DB: strapi_db
+    ports:
+      - "5433:5432"  # Puerto expuesto en tu máquina local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: strapi_app
+    environment:
+      NODE_ENV: production
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres  # Conecta usando el nombre del servicio
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi_db
+      DATABASE_USERNAME: strapi_user
+      DATABASE_PASSWORD: strapi_password
+    ports:
+      - "1337:1337"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
